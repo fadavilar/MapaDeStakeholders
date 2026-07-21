@@ -20,6 +20,25 @@
   </header>
 
   <main class="contenedor">
+    <section class="intro">
+      <p>
+        <strong>¿Por qué usar esta herramienta?</strong> Mapear stakeholders es un paso
+        estándar en acceso al mercado, asuntos regulatorios y asuntos públicos en salud:
+        ayuda a anticipar quién puede facilitar o frenar un proyecto, producto o política,
+        y a priorizar dónde invertir el esfuerzo de relacionamiento. Esta app traduce ese
+        ejercicio al vocabulario y a los actores propios del sistema de salud colombiano
+        (Ministerio de Salud, INVIMA, ADRES, EPS, IPS, IETS, gremios, pacientes, entre
+        otros), evitando construir la matriz desde cero en una hoja de cálculo.
+      </p>
+      <p>
+        <strong>¿Para quién es?</strong> Estudiantes y docentes de maestrías o cursos en
+        acceso al mercado, asuntos regulatorios, gestión en salud o administración
+        farmacéutica; y profesionales de la industria farmacéutica (acceso, asuntos
+        regulatorios, asuntos públicos, market access) que necesiten construir o
+        presentar un mapa de actores para un producto, terapia o proyecto específico.
+      </p>
+    </section>
+
     <details id="panel-metodologia" class="panel-metodologia">
       <summary id="btn-metodologia">📘 Guía metodológica: ¿cómo usar esta herramienta?</summary>
       <div class="panel-metodologia-contenido">
@@ -78,17 +97,46 @@
           </div>
 
           <div class="campo campo-slider">
-            <label for="influencia">Influencia: <span id="influencia-valor">5</span>/10</label>
+            <label for="influencia">
+              Influencia: <span id="influencia-valor">5</span>/10
+              <span class="ayuda" tabindex="0">
+                ⓘ
+                <span class="ayuda-tooltip" role="tooltip">
+                  Capacidad del actor de afectar decisiones, políticas, aprobaciones o
+                  resultados del proyecto/producto (poder de decisión, control de
+                  recursos, autoridad regulatoria o normativa).
+                </span>
+              </span>
+            </label>
             <input type="range" id="influencia" name="influencia" min="0" max="10" step="1" value="5" />
           </div>
 
           <div class="campo campo-slider">
-            <label for="interes">Interés: <span id="interes-valor">5</span>/10</label>
+            <label for="interes">
+              Interés: <span id="interes-valor">5</span>/10
+              <span class="ayuda" tabindex="0">
+                ⓘ
+                <span class="ayuda-tooltip" role="tooltip">
+                  Grado en que el actor se ve afectado por el tema, o el nivel de
+                  motivación/atención que le presta al proyecto o producto en cuestión.
+                </span>
+              </span>
+            </label>
             <input type="range" id="interes" name="interes" min="0" max="10" step="1" value="5" />
           </div>
 
           <div class="campo campo-slider">
-            <label for="tamano">Tamaño de burbuja (impacto): <span id="tamano-valor">5</span>/10</label>
+            <label for="tamano">
+              Tamaño de burbuja (impacto): <span id="tamano-valor">5</span>/10
+              <span class="ayuda" tabindex="0">
+                ⓘ
+                <span class="ayuda-tooltip" role="tooltip">
+                  Magnitud del efecto esperado si el actor actúa a favor o en contra del
+                  proyecto (atributo visual opcional). No altera el cuadrante, que solo
+                  depende de influencia e interés.
+                </span>
+              </span>
+            </label>
             <input type="range" id="tamano" name="tamano" min="1" max="10" step="1" value="5" />
           </div>
 
@@ -129,6 +177,43 @@
         </div>
       </section>
     </div>
+
+    <details id="panel-referencias" class="panel-metodologia">
+      <summary>📚 Referencias y fuentes</summary>
+      <div class="panel-metodologia-contenido">
+        <p>Marco metodológico:</p>
+        <ul class="lista-referencias">
+          <li>
+            <a href="https://www.toolshero.com/strategy/mendelow-matrix/" target="_blank" rel="noopener">Mendelow's Matrix: Stakeholder Mapping Explained — Toolshero</a>
+            — explicación de la matriz de poder-interés (Mendelow, 1991) en la que se basa esta herramienta.
+          </li>
+          <li>
+            <a href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=5248" target="_blank" rel="noopener">Ley 100 de 1993 — Gestor Normativo, Función Pública</a>
+            — norma que crea el Sistema General de Seguridad Social en Salud de Colombia.
+          </li>
+        </ul>
+        <p>Entidades de gobierno y regulación:</p>
+        <ul class="lista-referencias">
+          <li><a href="https://www.minsalud.gov.co" target="_blank" rel="noopener">Ministerio de Salud y Protección Social</a> — ente rector del sistema de salud colombiano.</li>
+          <li><a href="https://www.invima.gov.co" target="_blank" rel="noopener">INVIMA</a> — autoridad de registro sanitario y vigilancia de medicamentos.</li>
+          <li><a href="https://www.adres.gov.co" target="_blank" rel="noopener">ADRES</a> — administradora de los recursos del sistema (giro directo, recobros).</li>
+          <li><a href="https://www.supersalud.gov.co" target="_blank" rel="noopener">Superintendencia Nacional de Salud</a> — inspección, vigilancia y control de EPS/IPS.</li>
+          <li><a href="https://www.iets.org.co" target="_blank" rel="noopener">IETS</a> — evaluaciones de tecnología sanitaria que soportan decisiones de cobertura.</li>
+          <li><a href="https://cuentadealtocosto.org" target="_blank" rel="noopener">Cuenta de Alto Costo</a> — gestión de información y riesgo en enfermedades de alto costo.</li>
+        </ul>
+        <p>Gremios sectoriales:</p>
+        <ul class="lista-referencias">
+          <li><a href="https://www.andi.com.co/Home/Camara/18-industria-farmaceutica" target="_blank" rel="noopener">ANDI — Cámara de la Industria Farmacéutica</a> — gremio de la industria farmacéutica innovadora/multinacional.</li>
+          <li><a href="https://www.asinfar.org/" target="_blank" rel="noopener">ASINFAR</a> — gremio de la industria farmacéutica nacional/genéricos.</li>
+          <li><a href="https://acemi.org.co/" target="_blank" rel="noopener">ACEMI</a> — gremio de EPS del régimen contributivo.</li>
+        </ul>
+        <p class="nota-metodologica">
+          Todos los enlaces fueron verificados como activos y oficiales al momento de
+          publicar esta versión. Si detectas un enlace roto, por favor abre un issue en
+          el repositorio.
+        </p>
+      </div>
+    </details>
   </main>
 
   <footer class="pie">

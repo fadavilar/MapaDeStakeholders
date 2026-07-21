@@ -75,6 +75,77 @@ html, body {
   cursor: pointer;
 }
 
+.intro {
+  background: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  margin: 20px 0;
+  padding: 16px 18px;
+  box-shadow: var(--sombra);
+  line-height: 1.55;
+}
+.intro p { margin: 0 0 10px; color: var(--color-texto-suave); }
+.intro p:last-child { margin-bottom: 0; }
+.intro strong { color: var(--color-texto); }
+
+.ayuda {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color-primario);
+  cursor: help;
+  vertical-align: middle;
+}
+
+.ayuda-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 240px;
+  background: var(--color-texto);
+  color: var(--color-superficie);
+  font-size: 0.78rem;
+  font-weight: 400;
+  line-height: 1.4;
+  padding: 8px 10px;
+  border-radius: 7px;
+  box-shadow: var(--sombra);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.12s ease;
+  z-index: 20;
+  pointer-events: none;
+}
+.ayuda-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: var(--color-texto);
+}
+.ayuda:hover .ayuda-tooltip,
+.ayuda:focus .ayuda-tooltip,
+.ayuda:focus-visible .ayuda-tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lista-referencias {
+  margin: 0 0 14px;
+  padding-left: 20px;
+}
+.lista-referencias li { margin-bottom: 6px; }
+.lista-referencias a { color: var(--color-primario); font-weight: 600; }
+
 .panel-metodologia {
   background: var(--color-superficie);
   border: 1px solid var(--color-borde);

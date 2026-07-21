@@ -9,8 +9,24 @@ Pensada como **guía académica y práctica** — sirve tanto para clases y trab
 de grado como para ejercicios reales de acceso al mercado, asuntos regulatorios
 o asuntos públicos ("public affairs") en el sector salud.
 
-🔗 **Demo en vivo:** publicada con GitHub Pages desde este mismo repositorio
-(ver sección [Despliegue](#despliegue-en-github-pages)).
+🔗 **Demo en vivo:** [fadavilar.github.io/MapaDeStakeholders](https://fadavilar.github.io/MapaDeStakeholders/)
+
+## ¿Por qué usar esta herramienta?
+
+Mapear stakeholders es un paso estándar en acceso al mercado, asuntos
+regulatorios y asuntos públicos en salud: ayuda a anticipar quién puede
+facilitar o frenar un proyecto, producto o política, y a priorizar dónde
+invertir el esfuerzo de relacionamiento. Esta app traduce ese ejercicio al
+vocabulario y a los actores propios del sistema de salud colombiano, evitando
+construir la matriz desde cero en una hoja de cálculo.
+
+## ¿Para quién es?
+
+- Estudiantes y docentes de maestrías o cursos en acceso al mercado, asuntos
+  regulatorios, gestión en salud o administración farmacéutica.
+- Profesionales de la industria farmacéutica (acceso, asuntos regulatorios,
+  asuntos públicos, market access) que necesiten construir o presentar un
+  mapa de actores para un producto, terapia o proyecto específico.
 
 ## ¿Qué hace?
 
@@ -69,13 +85,9 @@ Este repositorio incluye un workflow de GitHub Actions
 (`.github/workflows/pages.yml`) que publica automáticamente el sitio estático
 en GitHub Pages con cada push a `main`.
 
-Para activarlo (solo la primera vez, requiere permisos de administrador del
-repositorio):
-
-1. Ve a **Settings → Pages** en GitHub.
-2. En **Build and deployment → Source**, selecciona **GitHub Actions**.
-3. Con el próximo push a `main`, el sitio quedará publicado en
-   `https://fadavilar.github.io/MapaDeStakeholders/`.
+GitHub Pages ya está activo para este repositorio (Source: GitHub Actions).
+Cada push a `main` vuelve a publicar el sitio automáticamente en
+`https://fadavilar.github.io/MapaDeStakeholders/`.
 
 ## Estructura del proyecto
 
@@ -102,6 +114,25 @@ El objetivo académico es que estudiantes, profesionales de acceso al mercado,
 asuntos regulatorios y asuntos públicos puedan **practicar y aplicar** el
 ejercicio de mapeo de actores con un vocabulario y ejemplos realistas del
 contexto colombiano, sin depender de licencias de software de pago.
+
+## Referencias y fuentes
+
+**Marco metodológico**
+- [Mendelow's Matrix: Stakeholder Mapping Explained — Toolshero](https://www.toolshero.com/strategy/mendelow-matrix/)
+- [Ley 100 de 1993 — Gestor Normativo, Función Pública](https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=5248)
+
+**Entidades de gobierno y regulación**
+- [Ministerio de Salud y Protección Social](https://www.minsalud.gov.co)
+- [INVIMA](https://www.invima.gov.co)
+- [ADRES](https://www.adres.gov.co)
+- [Superintendencia Nacional de Salud](https://www.supersalud.gov.co)
+- [IETS](https://www.iets.org.co)
+- [Cuenta de Alto Costo](https://cuentadealtocosto.org)
+
+**Gremios sectoriales**
+- [ANDI — Cámara de la Industria Farmacéutica](https://www.andi.com.co/Home/Camara/18-industria-farmaceutica)
+- [ASINFAR](https://www.asinfar.org/)
+- [ACEMI](https://acemi.org.co/)
 
 ## Aviso
 
