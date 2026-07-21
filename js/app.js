@@ -167,9 +167,23 @@ function limpiarTodo() {
   persistirYRenderizar();
 }
 
+function libreriaXLSXDisponible() {
+  if (typeof XLSX !== 'undefined') return true;
+  alert(
+    'No se pudo cargar la librería para leer/escribir Excel (SheetJS). ' +
+      'Verifica tu conexión a internet o que un bloqueador de contenido no esté ' +
+      'impidiendo la carga de cdnjs.cloudflare.com, y vuelve a intentarlo.'
+  );
+  return false;
+}
+
 async function manejarImportarXLSX(evento) {
   const file = evento.target.files[0];
   if (!file) return;
+  if (!libreriaXLSXDisponible()) {
+    evento.target.value = '';
+    return;
+  }
   try {
     const datos = await importarXLSX(file);
     const reemplazar =
@@ -216,6 +230,11 @@ function manejarExportarHTML() {
   exportarHTML(stakeholders, imagen);
 }
 
+function manejarExportarXLSX() {
+  if (!libreriaXLSXDisponible()) return;
+  exportarXLSX(stakeholders);
+}
+
 function inicializar() {
   poblarSelectCategorias();
   poblarSelectPaises();
@@ -235,14 +254,15 @@ function inicializar() {
   document.getElementById('interes').addEventListener('input', actualizarValoresSlider);
   document.getElementById('tamano').addEventListener('input', actualizarValoresSlider);
 
+  document.getElementById('selector-pais').addEventListener('change', cargarDatasetEjemplo);
   document.getElementById('btn-ejemplo').addEventListener('click', cargarDatasetEjemplo);
   document.getElementById('btn-limpiar-todo').addEventListener('click', limpiarTodo);
-  document.getElementById('btn-plantilla-xlsx').addEventListener('click', descargarPlantillaXLSX);
-  document.getElementById('btn-exportar-xlsx').addEventListener('click', () => exportarXLSX(stakeholders));
+  document.getElementById('btn-exportar-xlsx').addEventListener('click', manejarExportarXLSX);
   document.getElementById('btn-exportar-html').addEventListener('click', manejarExportarHTML);
   document.getElementById('btn-exportar-png').addEventListener('click', exportarGraficoPNG);
   document.getElementById('input-importar-xlsx').addEventListener('change', manejarImportarXLSX);
   document.getElementById('btn-importar-xlsx').addEventListener('click', () => {
+    if (!libreriaXLSXDisponible()) return;
     document.getElementById('input-importar-xlsx').click();
   });
 }

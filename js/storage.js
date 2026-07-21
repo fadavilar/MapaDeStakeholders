@@ -38,42 +38,6 @@ function descargarArchivo(contenido, nombreArchivo, tipoMime) {
 
 const ENCABEZADOS_XLSX = ['Nombre', 'Categoría', 'Influencia (0-10)', 'Interés (0-10)', 'Impacto (1-10)', 'Notas'];
 
-function descargarPlantillaXLSX() {
-  const filasEjemplo = [
-    ['Ministerio de Salud (ejemplo)', 'Gobierno / Ente rector', 10, 8, 8, 'Ente rector del sistema de salud.'],
-    ['EPS / aseguradora (ejemplo)', 'Aseguramiento', 8, 9, 7, 'Gestiona acceso y compra de medicamentos.'],
-  ];
-  const hojaDatos = XLSX.utils.aoa_to_sheet([ENCABEZADOS_XLSX, ...filasEjemplo]);
-  hojaDatos['!cols'] = [{ wch: 34 }, { wch: 30 }, { wch: 16 }, { wch: 16 }, { wch: 14 }, { wch: 45 }];
-
-  const filasInstrucciones = [
-    ['Cómo diligenciar esta plantilla'],
-    [''],
-    ['1. No cambie los encabezados de la hoja "Actores".'],
-    ['2. Use una fila por cada actor/stakeholder.'],
-    ['3. La columna "Categoría" debe ser una de las siguientes (copie el texto exacto):'],
-    ...CATEGORIAS.map((c) => [`   • ${c.label}`, '', c.ejemplo]),
-    [''],
-    ['4. Influencia e Interés: números enteros de 0 a 10.'],
-    ['5. Impacto: número entero de 1 a 10 (opcional; controla el tamaño de la burbuja).'],
-    ['6. Notas: texto libre, opcional.'],
-    [''],
-    ['Guarde el archivo y cárguelo con el botón "Cargar desde Excel" en la aplicación.'],
-  ];
-  const hojaInstrucciones = XLSX.utils.aoa_to_sheet(filasInstrucciones);
-  hojaInstrucciones['!cols'] = [{ wch: 55 }, { wch: 10 }, { wch: 45 }];
-
-  const libro = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(libro, hojaInstrucciones, 'Instrucciones');
-  XLSX.utils.book_append_sheet(libro, hojaDatos, 'Actores');
-
-  const buffer = XLSX.write(libro, { bookType: 'xlsx', type: 'array' });
-  descargarArchivo(
-    new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }),
-    'plantilla-mapa-stakeholders.xlsx'
-  );
-}
-
 function exportarXLSX(stakeholders) {
   const filas = stakeholders.map((s) => [
     s.nombre,

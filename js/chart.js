@@ -64,7 +64,7 @@ const pluginCuadrantes = {
 
 function radioBurbuja(tamano) {
   const t = Math.max(1, Math.min(10, Number(tamano) || 5));
-  return 8 + (t - 1) * ((28 - 8) / 9);
+  return 6 + (t - 1) * ((20 - 6) / 9);
 }
 
 function construirDatasets(stakeholders) {
@@ -108,7 +108,8 @@ function renderizarGrafico(stakeholders) {
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      layout: { padding: 4 },
+      clip: false,
+      layout: { padding: { top: 30, right: 26, bottom: 6, left: 6 } },
       scales: {
         x: {
           min: ESCALA_MIN,

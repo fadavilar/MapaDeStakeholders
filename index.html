@@ -6,7 +6,7 @@
   <title>Mapa de Stakeholders — Sistema de Salud Latinoamericano</title>
   <meta name="description" content="Herramienta guía académica y práctica para mapear y diagramar stakeholders (matriz de influencia e interés) en el análisis de política pública en salud y la industria farmacéutica en Latinoamérica." />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='30' cy='30' r='16' fill='%231f4e8c'/%3E%3Ccircle cx='70' cy='35' r='12' fill='%23c2185b'/%3E%3Ccircle cx='45' cy='68' r='20' fill='%231a8f5e'/%3E%3C/svg%3E" />
-  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/styles.css?v=3" />
 </head>
 <body>
   <header class="cabecera">
@@ -79,7 +79,7 @@
       <label for="selector-pais" class="etiqueta-inline">País/región de ejemplo</label>
       <select id="selector-pais" class="select-inline"></select>
       <button type="button" id="btn-ejemplo" class="btn btn-secundario">📋 Cargar ejemplo</button>
-      <button type="button" id="btn-plantilla-xlsx" class="btn btn-secundario">📄 Descargar plantilla</button>
+      <a href="plantilla-mapa-stakeholders.xlsx" download class="btn btn-secundario">📄 Descargar plantilla</a>
       <button type="button" id="btn-importar-xlsx" class="btn btn-secundario">⬆️ Cargar desde Excel</button>
       <button type="button" id="btn-exportar-xlsx" class="btn btn-secundario">⬇️ Exportar Excel</button>
       <button type="button" id="btn-exportar-html" class="btn btn-secundario">📝 Exportar HTML</button>
@@ -88,6 +88,13 @@
       <input type="file" id="input-importar-xlsx" accept=".xlsx,.xls" hidden />
       <span id="contador-actores" class="contador-actores">0 actores</span>
     </section>
+    <p class="nota-plantilla">
+      La plantilla es un archivo Excel <strong>prediligenciado y estático</strong> (no se
+      genera con JavaScript): se descarga directo, funciona sin conexión y no depende de
+      ninguna librería externa, para que nunca falle por bloqueos de red o del navegador.
+      Solo "Cargar desde Excel" y "Exportar Excel" usan la librería
+      <a href="https://sheetjs.com/" target="_blank" rel="noopener">SheetJS</a> para leer/escribir el archivo.
+    </p>
 
     <div class="layout-principal">
       <section class="panel panel-formulario" aria-labelledby="titulo-formulario">
@@ -263,10 +270,10 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
-  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
-  <script src="js/data.js"></script>
-  <script src="js/storage.js"></script>
-  <script src="js/chart.js"></script>
-  <script src="js/app.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="js/data.js?v=3"></script>
+  <script src="js/storage.js?v=3"></script>
+  <script src="js/chart.js?v=3"></script>
+  <script src="js/app.js?v=3"></script>
 </body>
 </html>

@@ -51,9 +51,13 @@ en una hoja de cálculo.
 - Incluye **conjuntos de datos de ejemplo** para siete países/regiones
   (Colombia, Argentina, México, Perú, Ecuador, Brasil y Centroamérica y
   República Dominicana), listos para cargar con un clic desde un selector.
-- **Carga masiva vía Excel**: descarga una plantilla `.xlsx` con
+- **Carga masiva vía Excel**: descarga [`plantilla-mapa-stakeholders.xlsx`](plantilla-mapa-stakeholders.xlsx),
+  un archivo **estático y prediligenciado** (no generado por JavaScript) con
   instrucciones y categorías válidas, diligénciala y súbela con el botón
-  "Cargar desde Excel" — no requiere conocimientos técnicos.
+  "Cargar desde Excel" — no requiere conocimientos técnicos. Al ser estático,
+  la descarga nunca depende de una librería externa ni de conexión a
+  internet; solo "Cargar desde Excel" y "Exportar Excel" usan
+  [SheetJS](https://sheetjs.com/) para leer/escribir el archivo.
 - **Exporta** el mapa a Excel (`.xlsx`), a un reporte HTML autocontenido
   (fácil de abrir y leer en cualquier dispositivo, sin necesidad de Excel) y
   el gráfico como imagen PNG.
@@ -67,9 +71,9 @@ en una hoja de cálculo.
 1. Abre la aplicación (ver demo en vivo arriba, o `index.html` en local).
 2. Opcional: despliega **"Guía metodológica"** para repasar el marco
    conceptual antes de diligenciar.
-3. Elige un país/región en el selector y pulsa **"Cargar ejemplo"** para
-   partir de un conjunto ya construido, o descarga la **plantilla Excel**,
-   diligénciala y cárgala con **"Cargar desde Excel"**.
+3. Elige un país/región en el selector (carga automáticamente al
+   seleccionar) para partir de un conjunto ya construido, o descarga la
+   **plantilla Excel**, diligénciala y cárgala con **"Cargar desde Excel"**.
 4. Observa cómo cada actor se ubica automáticamente en el mapa de cuadrantes
    a la derecha, coloreado por categoría.
 5. Ajusta influencia/interés según tu análisis específico — **el
@@ -106,9 +110,10 @@ Cada push a `main` vuelve a publicar el sitio automáticamente en
 ├── index.html          # Estructura de la página
 ├── css/styles.css       # Estilos (tema claro/oscuro, responsivo)
 ├── js/data.js            # Categorías + datasets de ejemplo por país
-├── js/storage.js         # localStorage + plantilla/carga/exportación XLSX y HTML
+├── js/storage.js         # localStorage + carga/exportación XLSX y HTML
 ├── js/chart.js           # Bubble chart de 4 cuadrantes (Chart.js)
 ├── js/app.js              # Formulario CRUD, tabla, eventos
+├── plantilla-mapa-stakeholders.xlsx  # Plantilla Excel estática y prediligenciada
 └── .github/workflows/pages.yml  # Publicación automática en GitHub Pages
 ```
 
