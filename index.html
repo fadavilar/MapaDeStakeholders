@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mapa de Stakeholders — Sistema de Salud Colombiano</title>
-  <meta name="description" content="Herramienta guía académica y práctica para mapear y diagramar stakeholders (matriz de influencia e interés) relevantes para la industria farmacéutica en el sistema de salud colombiano." />
+  <title>Mapa de Stakeholders — Sistema de Salud Latinoamericano</title>
+  <meta name="description" content="Herramienta guía académica y práctica para mapear y diagramar stakeholders (matriz de influencia e interés) en el análisis de política pública en salud y la industria farmacéutica en Latinoamérica." />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='30' cy='30' r='16' fill='%231f4e8c'/%3E%3Ccircle cx='70' cy='35' r='12' fill='%23c2185b'/%3E%3Ccircle cx='45' cy='68' r='20' fill='%231a8f5e'/%3E%3C/svg%3E" />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
@@ -13,7 +13,7 @@
     <div class="contenedor cabecera-interior">
       <div class="cabecera-titulo">
         <h1>🗺️ Mapa de Stakeholders</h1>
-        <p class="subtitulo">Sistema de salud colombiano · Industria farmacéutica</p>
+        <p class="subtitulo">Política pública en salud e industria farmacéutica · Latinoamérica</p>
       </div>
       <button type="button" id="btn-tema" class="btn-icono btn-tema" title="Cambiar tema claro/oscuro">🌙</button>
     </div>
@@ -23,19 +23,22 @@
     <section class="intro">
       <p>
         <strong>¿Por qué usar esta herramienta?</strong> Mapear stakeholders es un paso
-        estándar en acceso al mercado, asuntos regulatorios y asuntos públicos en salud:
-        ayuda a anticipar quién puede facilitar o frenar un proyecto, producto o política,
-        y a priorizar dónde invertir el esfuerzo de relacionamiento. Esta app traduce ese
-        ejercicio al vocabulario y a los actores propios del sistema de salud colombiano
-        (Ministerio de Salud, INVIMA, ADRES, EPS, IPS, IETS, gremios, pacientes, entre
-        otros), evitando construir la matriz desde cero en una hoja de cálculo.
+        estándar en el análisis de política pública en salud, acceso al mercado, asuntos
+        regulatorios y asuntos públicos: ayuda a anticipar quién puede facilitar o frenar
+        una reforma, un proyecto o un producto, y a priorizar dónde invertir el esfuerzo
+        de relacionamiento. Esta app traduce ese ejercicio al vocabulario y a los actores
+        propios de los sistemas de salud latinoamericanos (ministerios de salud, agencias
+        reguladoras, aseguradores, prestadores, evaluadores de tecnología, gremios,
+        pacientes, entre otros), evitando construir la matriz desde cero en una hoja de
+        cálculo.
       </p>
       <p>
         <strong>¿Para quién es?</strong> Estudiantes y docentes de maestrías o cursos en
-        acceso al mercado, asuntos regulatorios, gestión en salud o administración
-        farmacéutica; y profesionales de la industria farmacéutica (acceso, asuntos
-        regulatorios, asuntos públicos, market access) que necesiten construir o
-        presentar un mapa de actores para un producto, terapia o proyecto específico.
+        política pública, salud pública, acceso al mercado, asuntos regulatorios o
+        administración farmacéutica; analistas de política pública en salud a nivel
+        regional o de país; y profesionales de la industria farmacéutica (acceso, asuntos
+        regulatorios, asuntos públicos, market access) que necesiten construir o presentar
+        un mapa de actores para una reforma, terapia o proyecto específico.
       </p>
     </section>
 
@@ -44,8 +47,9 @@
       <div class="panel-metodologia-contenido">
         <p>
           Esta herramienta aplica la <strong>matriz de poder-interés</strong> (basada en el
-          modelo de Mendelow) al análisis de actores del sistema de salud colombiano
-          relevantes para la industria farmacéutica: entes de gobierno y regulación,
+          modelo de Mendelow y en la literatura de análisis de actores en política de salud)
+          al mapeo de actores de los sistemas de salud latinoamericanos relevantes para
+          política pública y la industria farmacéutica: entes de gobierno y regulación,
           aseguradores, prestadores, gremios, academia, pacientes y otros grupos de interés.
         </p>
         <p>Para cada actor se diligencian dos variables clave (escala 0–10):</p>
@@ -72,13 +76,16 @@
     </details>
 
     <section class="barra-herramientas">
+      <label for="selector-pais" class="etiqueta-inline">País/región de ejemplo</label>
+      <select id="selector-pais" class="select-inline"></select>
       <button type="button" id="btn-ejemplo" class="btn btn-secundario">📋 Cargar ejemplo</button>
-      <button type="button" id="btn-exportar-json" class="btn btn-secundario">⬇️ Exportar JSON</button>
-      <button type="button" id="btn-importar-json" class="btn btn-secundario">⬆️ Importar JSON</button>
-      <button type="button" id="btn-exportar-csv" class="btn btn-secundario">⬇️ Exportar CSV</button>
+      <button type="button" id="btn-plantilla-xlsx" class="btn btn-secundario">📄 Descargar plantilla</button>
+      <button type="button" id="btn-importar-xlsx" class="btn btn-secundario">⬆️ Cargar desde Excel</button>
+      <button type="button" id="btn-exportar-xlsx" class="btn btn-secundario">⬇️ Exportar Excel</button>
+      <button type="button" id="btn-exportar-html" class="btn btn-secundario">📝 Exportar HTML</button>
       <button type="button" id="btn-exportar-png" class="btn btn-secundario">🖼️ Exportar imagen</button>
       <button type="button" id="btn-limpiar-todo" class="btn btn-peligro">🗑️ Limpiar todo</button>
-      <input type="file" id="input-importar-json" accept="application/json" hidden />
+      <input type="file" id="input-importar-xlsx" accept=".xlsx,.xls" hidden />
       <span id="contador-actores" class="contador-actores">0 actores</span>
     </section>
 
@@ -181,17 +188,43 @@
     <details id="panel-referencias" class="panel-metodologia">
       <summary>📚 Referencias y fuentes</summary>
       <div class="panel-metodologia-contenido">
-        <p>Marco metodológico:</p>
+        <p>Fundamentos teóricos del mapeo de stakeholders en política de salud:</p>
         <ul class="lista-referencias">
           <li>
             <a href="https://www.toolshero.com/strategy/mendelow-matrix/" target="_blank" rel="noopener">Mendelow's Matrix: Stakeholder Mapping Explained — Toolshero</a>
             — explicación de la matriz de poder-interés (Mendelow, 1991) en la que se basa esta herramienta.
           </li>
           <li>
-            <a href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=5248" target="_blank" rel="noopener">Ley 100 de 1993 — Gestor Normativo, Función Pública</a>
+            <a href="https://academic.oup.com/heapol/article/15/3/239/573296" target="_blank" rel="noopener">Brugha R, Varvasovszky Z (2000). "Stakeholder analysis: a review." <em>Health Policy and Planning</em></a>
+            — revisión académica de los métodos de análisis de actores en política de salud.
+          </li>
+          <li>
+            <a href="https://academic.oup.com/heapol/article/15/3/338/573312" target="_blank" rel="noopener">Varvasovszky Z, Brugha R (2000). "A stakeholder analysis." <em>Health Policy and Planning</em></a>
+            — guía práctica de cómo (y cómo no) realizar un análisis de actores, aplicada a una reforma de política de salud.
+          </li>
+          <li>
+            <a href="https://cnxus.org/wp-content/uploads/2022/04/Stakeholders_analysis_guidelines.pdf" target="_blank" rel="noopener">Schmeer K. "Stakeholder Analysis Guidelines" — Iniciativa Regional de Reforma del Sector Salud en América Latina y el Caribe (LAC-HSR)</a>
+            — guía paso a paso de análisis de actores para reformas de salud, desarrollada para la región.
+          </li>
+          <li>
+            <a href="https://hsph.harvard.edu/wp-content/uploads/2025/02/Health-Reform-Manual_FINAL_for-website-002.pdf" target="_blank" rel="noopener">Reich MR et al. "Health Reform Manual: Eight Practical Steps" — Harvard T.H. Chan School of Public Health</a>
+            — manual de análisis político aplicado a reformas de salud, incluyendo mapeo de actores.
+          </li>
+          <li>
+            <a href="https://www.ncbi.nlm.nih.gov/books/NBK569579/" target="_blank" rel="noopener">"Engaging Stakeholders..." — Evidence Synthesis for Health Policy and Systems: A Methods Guide, OMS (2018)</a>
+            — orientación de la OMS sobre involucrar actores en investigación de política y sistemas de salud.
+          </li>
+          <li>
+            <a href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=5248" target="_blank" rel="noopener">Ley 100 de 1993 — Gestor Normativo, Función Pública (Colombia)</a>
             — norma que crea el Sistema General de Seguridad Social en Salud de Colombia.
           </li>
         </ul>
+        <p class="nota-metodologica">
+          Se revisaron los documentos disponibles en la carpeta de trabajo inicial del
+          proyecto; corresponden a un estudio distinto sobre polifarmacia y no contienen
+          material sobre teoría de mapeo de stakeholders, por lo que las referencias
+          teóricas anteriores se tomaron de la literatura académica especializada.
+        </p>
         <p>Entidades de gobierno y regulación:</p>
         <ul class="lista-referencias">
           <li><a href="https://www.minsalud.gov.co" target="_blank" rel="noopener">Ministerio de Salud y Protección Social</a> — ente rector del sistema de salud colombiano.</li>
@@ -219,9 +252,9 @@
   <footer class="pie">
     <div class="contenedor">
       <p>
-        Herramienta académica de código abierto para el análisis de stakeholders en el sistema
-        de salud colombiano. Los datos se guardan únicamente en tu navegador (localStorage);
-        no se envían a ningún servidor.
+        Herramienta académica de código abierto para el análisis de stakeholders en política
+        pública de salud e industria farmacéutica en Latinoamérica. Los datos se guardan
+        únicamente en tu navegador (localStorage); no se envían a ningún servidor.
       </p>
       <p>
         <a href="https://github.com/fadavilar/MapaDeStakeholders" target="_blank" rel="noopener">Repositorio en GitHub</a>
@@ -230,6 +263,7 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
   <script src="js/data.js"></script>
   <script src="js/storage.js"></script>
   <script src="js/chart.js"></script>

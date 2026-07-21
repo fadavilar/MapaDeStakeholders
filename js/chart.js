@@ -147,9 +147,14 @@ function renderizarGrafico(stakeholders) {
   });
 }
 
+function obtenerImagenGrafico() {
+  if (!graficoStakeholders) return null;
+  return graficoStakeholders.toBase64Image('image/png', 1);
+}
+
 function exportarGraficoPNG() {
-  if (!graficoStakeholders) return;
-  const url = graficoStakeholders.toBase64Image('image/png', 1);
+  const url = obtenerImagenGrafico();
+  if (!url) return;
   const a = document.createElement('a');
   a.href = url;
   a.download = `mapa-stakeholders-${new Date().toISOString().slice(0, 10)}.png`;

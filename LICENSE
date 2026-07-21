@@ -1,21 +1,35 @@
-MIT License
+Aviso de reconocimiento de derechos intelectuales — Uso no comercial
+Mapa de Stakeholders — Sistema de Salud Colombiano y Latinoamericano
 
 Copyright (c) 2026 Fabian Davila
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Esta obra (código fuente, textos, datasets de ejemplo y demás contenidos de
+este repositorio) se distribuye bajo la licencia:
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+    Creative Commons Reconocimiento-NoComercial 4.0 Internacional
+    (CC BY-NC 4.0)
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+En términos generales, usted es libre de:
+  - Compartir: copiar y redistribuir el material en cualquier medio o formato.
+  - Adaptar: remezclar, transformar y construir a partir del material.
+
+Bajo los siguientes términos:
+  - Reconocimiento (Attribution): debe dar crédito de manera adecuada,
+    brindar un enlace a la licencia e indicar si se han realizado cambios.
+    Puede hacerlo de cualquier manera razonable, pero no de forma que
+    sugiera que usted o su uso tienen el apoyo del autor original.
+  - NoComercial (NonCommercial): no puede utilizar el material con fines
+    comerciales.
+
+Sin restricciones adicionales: no puede aplicar términos legales ni medidas
+tecnológicas que restrinjan legalmente a terceros hacer cualquier uso
+permitido por la licencia.
+
+Texto completo de la licencia (resumen legible):
+https://creativecommons.org/licenses/by-nc/4.0/deed.es
+
+Código legal completo:
+https://creativecommons.org/licenses/by-nc/4.0/legalcode.es
+
+Este aviso no sustituye la licencia; en caso de conflicto, prevalece el
+texto oficial de Creative Commons enlazado arriba.

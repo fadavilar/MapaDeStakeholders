@@ -15,6 +15,11 @@ function poblarSelectCategorias() {
   ).join('');
 }
 
+function poblarSelectPaises() {
+  const select = document.getElementById('selector-pais');
+  select.innerHTML = PAISES.map((p) => `<option value="${p.id}">${p.label}</option>`).join('');
+}
+
 function actualizarValoresSlider() {
   document.getElementById('influencia-valor').textContent = document.getElementById('influencia').value;
   document.getElementById('interes-valor').textContent = document.getElementById('interes').value;
@@ -143,11 +148,14 @@ function manejarClicTabla(evento) {
 }
 
 function cargarDatasetEjemplo() {
+  const paisId = document.getElementById('selector-pais').value;
+  const dataset = DATASETS_EJEMPLO[paisId];
+  if (!dataset) return;
   const reemplazar =
     stakeholders.length === 0 ||
     confirm('Esto reemplazará los actores actuales por el conjunto de ejemplo. ¿Continuar?');
   if (!reemplazar) return;
-  stakeholders = DATASET_EJEMPLO.map((s) => ({ id: generarId(), ...s }));
+  stakeholders = dataset.map((s) => ({ id: generarId(), ...s }));
   persistirYRenderizar();
 }
 
@@ -159,27 +167,19 @@ function limpiarTodo() {
   persistirYRenderizar();
 }
 
-async function manejarImportarJSON(evento) {
+async function manejarImportarXLSX(evento) {
   const file = evento.target.files[0];
   if (!file) return;
   try {
-    const data = await importarJSON(file);
-    const normalizados = data
-      .filter((s) => s && s.nombre)
-      .map((s) => ({
-        id: generarId(),
-        nombre: String(s.nombre),
-        categoria: CATEGORIAS.some((c) => c.id === s.categoria) ? s.categoria : 'otros',
-        influencia: Math.max(0, Math.min(10, Number(s.influencia) || 5)),
-        interes: Math.max(0, Math.min(10, Number(s.interes) || 5)),
-        tamano: Math.max(1, Math.min(10, Number(s.tamano) || 5)),
-        notas: s.notas ? String(s.notas) : '',
-      }));
-    if (normalizados.length === 0) throw new Error('El archivo no contiene actores válidos.');
-    stakeholders = normalizados;
+    const datos = await importarXLSX(file);
+    const reemplazar =
+      stakeholders.length === 0 ||
+      confirm(`Se encontraron ${datos.length} actor(es) en el archivo. Esto reemplazará los actores actuales. ¿Continuar?`);
+    if (!reemplazar) return;
+    stakeholders = datos.map((s) => ({ id: generarId(), ...s }));
     persistirYRenderizar();
   } catch (e) {
-    alert(`No se pudo importar el archivo: ${e.message}`);
+    alert(`No se pudo cargar el archivo: ${e.message}`);
   } finally {
     evento.target.value = '';
   }
@@ -211,8 +211,14 @@ function inicializarPanelMetodologia() {
   });
 }
 
+function manejarExportarHTML() {
+  const imagen = obtenerImagenGrafico();
+  exportarHTML(stakeholders, imagen);
+}
+
 function inicializar() {
   poblarSelectCategorias();
+  poblarSelectPaises();
   inicializarTema();
   inicializarPanelMetodologia();
 
@@ -231,12 +237,13 @@ function inicializar() {
 
   document.getElementById('btn-ejemplo').addEventListener('click', cargarDatasetEjemplo);
   document.getElementById('btn-limpiar-todo').addEventListener('click', limpiarTodo);
-  document.getElementById('btn-exportar-json').addEventListener('click', () => exportarJSON(stakeholders));
-  document.getElementById('btn-exportar-csv').addEventListener('click', () => exportarCSV(stakeholders));
+  document.getElementById('btn-plantilla-xlsx').addEventListener('click', descargarPlantillaXLSX);
+  document.getElementById('btn-exportar-xlsx').addEventListener('click', () => exportarXLSX(stakeholders));
+  document.getElementById('btn-exportar-html').addEventListener('click', manejarExportarHTML);
   document.getElementById('btn-exportar-png').addEventListener('click', exportarGraficoPNG);
-  document.getElementById('input-importar-json').addEventListener('change', manejarImportarJSON);
-  document.getElementById('btn-importar-json').addEventListener('click', () => {
-    document.getElementById('input-importar-json').click();
+  document.getElementById('input-importar-xlsx').addEventListener('change', manejarImportarXLSX);
+  document.getElementById('btn-importar-xlsx').addEventListener('click', () => {
+    document.getElementById('input-importar-xlsx').click();
   });
 }
 

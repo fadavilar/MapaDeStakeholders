@@ -203,6 +203,22 @@ html, body {
   font-size: 0.9rem;
 }
 
+.etiqueta-inline {
+  font-size: 0.85rem;
+  color: var(--color-texto-suave);
+  font-weight: 600;
+}
+
+.select-inline {
+  padding: 7px 8px;
+  border: 1px solid var(--color-borde);
+  border-radius: 7px;
+  background: var(--color-superficie);
+  color: var(--color-texto);
+  font-size: 0.85rem;
+  font-family: inherit;
+}
+
 .btn {
   border: 1px solid var(--color-borde);
   background: var(--color-superficie);
