@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mapa de Stakeholders — Sistema de Salud Colombiano</title>
+  <meta name="description" content="Herramienta guía académica y práctica para mapear y diagramar stakeholders (matriz de influencia e interés) relevantes para la industria farmacéutica en el sistema de salud colombiano." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='30' cy='30' r='16' fill='%231f4e8c'/%3E%3Ccircle cx='70' cy='35' r='12' fill='%23c2185b'/%3E%3Ccircle cx='45' cy='68' r='20' fill='%231a8f5e'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="cabecera">
+    <div class="contenedor cabecera-interior">
+      <div class="cabecera-titulo">
+        <h1>🗺️ Mapa de Stakeholders</h1>
+        <p class="subtitulo">Sistema de salud colombiano · Industria farmacéutica</p>
+      </div>
+      <button type="button" id="btn-tema" class="btn-icono btn-tema" title="Cambiar tema claro/oscuro">🌙</button>
+    </div>
+  </header>
+
+  <main class="contenedor">
+    <details id="panel-metodologia" class="panel-metodologia">
+      <summary id="btn-metodologia">📘 Guía metodológica: ¿cómo usar esta herramienta?</summary>
+      <div class="panel-metodologia-contenido">
+        <p>
+          Esta herramienta aplica la <strong>matriz de poder-interés</strong> (basada en el
+          modelo de Mendelow) al análisis de actores del sistema de salud colombiano
+          relevantes para la industria farmacéutica: entes de gobierno y regulación,
+          aseguradores, prestadores, gremios, academia, pacientes y otros grupos de interés.
+        </p>
+        <p>Para cada actor se diligencian dos variables clave (escala 0–10):</p>
+        <ul>
+          <li><strong>Influencia:</strong> capacidad del actor de afectar decisiones, políticas o resultados del proyecto/producto.</li>
+          <li><strong>Interés:</strong> nivel de interés o afectación que el actor tiene frente al tema/producto en cuestión.</li>
+        </ul>
+        <p>El cruce de ambas variables ubica al actor en uno de cuatro cuadrantes, cada uno con una estrategia de relacionamiento sugerida:</p>
+        <div class="grid-cuadrantes-info">
+          <div><strong>Jugadores clave</strong> (alta influencia, alto interés) — gestionar de cerca, involucrar activamente.</div>
+          <div><strong>Mantener satisfechos</strong> (alta influencia, bajo interés) — mantener informados sin saturar, monitorear cambios de interés.</div>
+          <div><strong>Mantener informados</strong> (baja influencia, alto interés) — comunicación regular, pueden influir indirectamente o escalar su poder.</div>
+          <div><strong>Monitorear</strong> (baja influencia, bajo interés) — esfuerzo mínimo, seguimiento periódico.</div>
+        </div>
+        <p class="nota-metodologica">
+          El tamaño de la burbuja es un tercer atributo opcional (por ejemplo, magnitud del
+          impacto esperado) y no altera el cuadrante. El posicionamiento es siempre
+          <strong>relativo a un producto, terapia o proyecto específico</strong>: un mismo
+          actor puede ubicarse de forma distinta según el contexto analizado. Use el botón
+          <em>"Cargar ejemplo"</em> para ver un conjunto ilustrativo de actores típicos y
+          ajústelo a su propio análisis.
+        </p>
+      </div>
+    </details>
+
+    <section class="barra-herramientas">
+      <button type="button" id="btn-ejemplo" class="btn btn-secundario">📋 Cargar ejemplo</button>
+      <button type="button" id="btn-exportar-json" class="btn btn-secundario">⬇️ Exportar JSON</button>
+      <button type="button" id="btn-importar-json" class="btn btn-secundario">⬆️ Importar JSON</button>
+      <button type="button" id="btn-exportar-csv" class="btn btn-secundario">⬇️ Exportar CSV</button>
+      <button type="button" id="btn-exportar-png" class="btn btn-secundario">🖼️ Exportar imagen</button>
+      <button type="button" id="btn-limpiar-todo" class="btn btn-peligro">🗑️ Limpiar todo</button>
+      <input type="file" id="input-importar-json" accept="application/json" hidden />
+      <span id="contador-actores" class="contador-actores">0 actores</span>
+    </section>
+
+    <div class="layout-principal">
+      <section class="panel panel-formulario" aria-labelledby="titulo-formulario">
+        <h2 id="titulo-formulario">Diligenciar actor</h2>
+        <form id="form-stakeholder" novalidate>
+          <div class="campo">
+            <label for="nombre">Nombre del actor *</label>
+            <input type="text" id="nombre" name="nombre" required placeholder="Ej. EPS régimen contributivo" />
+          </div>
+
+          <div class="campo">
+            <label for="categoria">Categoría *</label>
+            <select id="categoria" name="categoria" required></select>
+          </div>
+
+          <div class="campo campo-slider">
+            <label for="influencia">Influencia: <span id="influencia-valor">5</span>/10</label>
+            <input type="range" id="influencia" name="influencia" min="0" max="10" step="1" value="5" />
+          </div>
+
+          <div class="campo campo-slider">
+            <label for="interes">Interés: <span id="interes-valor">5</span>/10</label>
+            <input type="range" id="interes" name="interes" min="0" max="10" step="1" value="5" />
+          </div>
+
+          <div class="campo campo-slider">
+            <label for="tamano">Tamaño de burbuja (impacto): <span id="tamano-valor">5</span>/10</label>
+            <input type="range" id="tamano" name="tamano" min="1" max="10" step="1" value="5" />
+          </div>
+
+          <div class="campo">
+            <label for="notas">Notas (opcional)</label>
+            <textarea id="notas" name="notas" rows="3" placeholder="Rol, intereses específicos, estrategia de relacionamiento..."></textarea>
+          </div>
+
+          <div class="acciones-formulario">
+            <button type="submit" id="btn-guardar" class="btn btn-primario">Agregar actor</button>
+            <button type="button" id="btn-cancelar-edicion" class="btn btn-texto" hidden>Cancelar edición</button>
+          </div>
+        </form>
+
+        <div class="tabla-wrap">
+          <table class="tabla-stakeholders">
+            <thead>
+              <tr>
+                <th>Categoría</th>
+                <th>Actor</th>
+                <th>Infl.</th>
+                <th>Int.</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="cuerpo-tabla"></tbody>
+          </table>
+          <p id="tabla-vacia" class="tabla-vacia">
+            Aún no hay actores diligenciados. Agrega uno con el formulario o carga el conjunto de ejemplo.
+          </p>
+        </div>
+      </section>
+
+      <section class="panel panel-grafico" aria-labelledby="titulo-grafico">
+        <h2 id="titulo-grafico">Mapa de cuadrantes: Influencia vs. Interés</h2>
+        <div class="grafico-contenedor">
+          <canvas id="grafico-stakeholders"></canvas>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor">
+      <p>
+        Herramienta académica de código abierto para el análisis de stakeholders en el sistema
+        de salud colombiano. Los datos se guardan únicamente en tu navegador (localStorage);
+        no se envían a ningún servidor.
+      </p>
+      <p>
+        <a href="https://github.com/fadavilar/MapaDeStakeholders" target="_blank" rel="noopener">Repositorio en GitHub</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/chart.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
