@@ -37,39 +37,56 @@ const PAISES = [
 ];
 
 /**
- * Referencias regulatorias oficiales por país/región (entes rectores y
- * autoridades de registro sanitario), enlazadas según el país seleccionado
- * en el selector de ejemplo. Todos los enlaces fueron verificados como
- * activos al momento de publicar esta versión.
+ * Referencias oficiales por país/región (entes rectores, autoridades de
+ * registro sanitario y gremios de la industria farmacéutica citados en el
+ * dataset de ejemplo de cada país), mostradas dinámicamente según el país
+ * seleccionado en el selector de ejemplo. Todos los enlaces fueron
+ * verificados como activos al momento de publicar esta versión.
  */
-const REGULACION_POR_PAIS = {
+const REFERENCIAS_POR_PAIS = {
   colombia: [
     { label: 'Ministerio de Salud y Protección Social', url: 'https://www.minsalud.gov.co' },
     { label: 'INVIMA', url: 'https://www.invima.gov.co' },
+    { label: 'ADRES', url: 'https://www.adres.gov.co' },
+    { label: 'Superintendencia Nacional de Salud', url: 'https://www.supersalud.gov.co' },
+    { label: 'IETS', url: 'https://www.iets.org.co' },
+    { label: 'Cuenta de Alto Costo', url: 'https://cuentadealtocosto.org' },
+    { label: 'ANDI — Cámara de la Industria Farmacéutica', url: 'https://www.andi.com.co/Home/Camara/18-industria-farmaceutica' },
+    { label: 'ASINFAR', url: 'https://www.asinfar.org/' },
+    { label: 'ACEMI', url: 'https://acemi.org.co/' },
   ],
   argentina: [
     { label: 'Ministerio de Salud de la Nación', url: 'https://www.argentina.gob.ar/salud' },
     { label: 'ANMAT', url: 'https://www.argentina.gob.ar/anmat' },
+    { label: 'CAEMe', url: 'https://www.caeme.org.ar' },
+    { label: 'CILFA', url: 'https://www.cilfa.org.ar' },
   ],
   mexico: [
     { label: 'Secretaría de Salud', url: 'https://www.gob.mx/salud' },
     { label: 'COFEPRIS', url: 'https://www.gob.mx/cofepris' },
+    { label: 'CANIFARMA', url: 'https://www.canifarma.org.mx' },
+    { label: 'AMIIF', url: 'https://amiif.org' },
   ],
   peru: [
     { label: 'MINSA', url: 'https://www.gob.pe/minsa' },
     { label: 'DIGEMID', url: 'https://www.digemid.minsa.gob.pe/' },
+    { label: 'ALAFARPE', url: 'https://www.alafarpe.org.pe' },
+    { label: 'ADIFAN', url: 'https://www.adifan.org.pe' },
   ],
   ecuador: [
     { label: 'Ministerio de Salud Pública', url: 'https://www.salud.gob.ec/' },
     { label: 'ARCSA', url: 'https://www.controlsanitario.gob.ec/' },
+    { label: 'ALFE (Asociación de Laboratorios Farmacéuticos del Ecuador)', url: 'https://alfe-ecuador.org/' },
   ],
   brasil: [
     { label: 'Ministério da Saúde', url: 'https://www.gov.br/saude/pt-br' },
     { label: 'ANVISA', url: 'https://www.gov.br/anvisa/pt-br' },
+    { label: 'Interfarma', url: 'https://www.interfarma.org.br/' },
   ],
   centroamerica: [
     { label: 'Ministerio de Salud de Costa Rica (ejemplo nacional)', url: 'https://www.ministeriodesalud.go.cr' },
     { label: 'OPS/OMS — Oficina Regional para las Américas', url: 'https://www.paho.org/es' },
+    { label: 'FEDEFARMA', url: 'https://www.fedefarma.com' },
   ],
 };
 
@@ -179,7 +196,7 @@ const DATASETS_EJEMPLO = {
     { nombre: 'Clínicas y hospitales privados', categoria: 'prestacion', influencia: 5, interes: 7, tamano: 5, notas: 'Prestación privada en principales ciudades.' },
     { nombre: 'Laboratorios farmacéuticos innovadores', categoria: 'industria', influencia: 6, interes: 10, tamano: 7, notas: 'Investigación, registro y comercialización de nuevas moléculas.' },
     { nombre: 'Laboratorios nacionales de genéricos', categoria: 'industria', influencia: 5, interes: 9, tamano: 6, notas: 'Industria farmacéutica local.' },
-    { nombre: 'Cámaras y gremios de la industria farmacéutica', categoria: 'gremios', influencia: 5, interes: 9, tamano: 5, notas: 'Representación gremial de laboratorios nacionales y multinacionales.' },
+    { nombre: 'ALFE (Asociación de Laboratorios Farmacéuticos del Ecuador)', categoria: 'gremios', influencia: 5, interes: 9, tamano: 5, notas: 'Representación gremial de laboratorios nacionales y multinacionales.' },
     { nombre: 'Federación Médica Ecuatoriana', categoria: 'profesionales', influencia: 5, interes: 6, tamano: 4, notas: 'Guías clínicas y práctica de prescripción.' },
     { nombre: 'Asamblea Nacional', categoria: 'legislativo', influencia: 7, interes: 4, tamano: 5, notas: 'Presupuesto y reformas legislativas en salud.' },
     { nombre: 'Asociaciones de pacientes', categoria: 'pacientes', influencia: 4, interes: 9, tamano: 5, notas: 'Incidencia en acceso a tratamientos de alto costo.' },
@@ -199,7 +216,7 @@ const DATASETS_EJEMPLO = {
     { nombre: 'Laboratórios farmacêuticos inovadores', categoria: 'industria', influencia: 7, interes: 10, tamano: 7, notas: 'Investigación, registro y comercialización de nuevas moléculas.' },
     { nombre: 'Laboratórios nacionais / genéricos', categoria: 'industria', influencia: 5, interes: 9, tamano: 6, notas: 'Uno de los mercados de genéricos más grandes de la región.' },
     { nombre: 'Interfarma', categoria: 'gremios', influencia: 6, interes: 9, tamano: 6, notas: 'Associação da Indústria Farmacêutica de Pesquisa.' },
-    { nombre: 'Febrafarma', categoria: 'gremios', influencia: 5, interes: 9, tamano: 5, notas: 'Federação Brasileira da Indústria Farmacêutica.' },
+    { nombre: 'Laboratórios nacionais / genéricos (associação)', categoria: 'gremios', influencia: 5, interes: 9, tamano: 5, notas: 'Representación gremial de la industria de genéricos y capital nacional.' },
     { nombre: 'Congresso Nacional', categoria: 'legislativo', influencia: 7, interes: 4, tamano: 5, notas: 'Presupuesto y reformas legislativas en salud.' },
     { nombre: 'Associações de pacientes', categoria: 'pacientes', influencia: 4, interes: 9, tamano: 5, notas: 'Incidencia en judicialización de la salud ("judicialização").' },
     { nombre: 'Academia / universidades', categoria: 'academia', influencia: 3, interes: 5, tamano: 4, notas: 'Formación e investigación clínica y en salud pública.' },

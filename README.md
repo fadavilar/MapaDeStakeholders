@@ -60,9 +60,10 @@ en una hoja de cálculo.
   la descarga nunca depende de una librería externa ni de conexión a
   internet; solo "Cargar desde Excel" y "Exportar Excel" usan
   [SheetJS](https://sheetjs.com/) para leer/escribir el archivo.
-- **Exporta** el mapa a Excel (`.xlsx`), a un reporte HTML autocontenido
-  (fácil de abrir y leer en cualquier dispositivo, sin necesidad de Excel) y
-  el gráfico como imagen PNG.
+- **Exporta** el mapa a Excel (`.xlsx`), a un reporte HTML autocontenido con
+  **gráfico interactivo** (los tooltips al pasar el cursor sobre cada
+  burbuja funcionan igual que en la app; requiere conexión a internet para
+  cargar Chart.js) y el gráfico como imagen PNG.
 - Los datos se guardan **solo en el navegador del usuario** (`localStorage`).
   No hay backend, no hay base de datos, no se envía información a ningún
   servidor — por lo tanto no hay necesidad de inicio de sesión ni riesgos de
@@ -153,20 +154,17 @@ depender de licencias de software de pago.
 - [Stakeholder Mapping — Johns Hopkins University (Imagine)](https://imagine.jhu.edu/resources/stakeholder-mapping/)
 - [Ley 100 de 1993 — Gestor Normativo, Función Pública (Colombia)](https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=5248)
 
-**Entidades de gobierno y regulación por país** (también se muestran de forma
-dinámica en la app, según el país seleccionado en el selector de ejemplo)
-- **Colombia:** [Ministerio de Salud y Protección Social](https://www.minsalud.gov.co) · [INVIMA](https://www.invima.gov.co) · [ADRES](https://www.adres.gov.co) · [Superintendencia Nacional de Salud](https://www.supersalud.gov.co) · [IETS](https://www.iets.org.co) · [Cuenta de Alto Costo](https://cuentadealtocosto.org)
-- **Argentina:** [Ministerio de Salud de la Nación](https://www.argentina.gob.ar/salud) · [ANMAT](https://www.argentina.gob.ar/anmat)
-- **México:** [Secretaría de Salud](https://www.gob.mx/salud) · [COFEPRIS](https://www.gob.mx/cofepris)
-- **Perú:** [MINSA](https://www.gob.pe/minsa) · [DIGEMID](https://www.digemid.minsa.gob.pe/)
-- **Ecuador:** [Ministerio de Salud Pública](https://www.salud.gob.ec/) · [ARCSA](https://www.controlsanitario.gob.ec/)
-- **Brasil:** [Ministério da Saúde](https://www.gov.br/saude/pt-br) · [ANVISA](https://www.gov.br/anvisa/pt-br)
-- **Centroamérica:** [Ministerio de Salud de Costa Rica](https://www.ministeriodesalud.go.cr) (ejemplo nacional) · [OPS/OMS — Oficina Regional para las Américas](https://www.paho.org/es)
-
-**Gremios sectoriales (Colombia, ver dataset de ejemplo)**
-- [ANDI — Cámara de la Industria Farmacéutica](https://www.andi.com.co/Home/Camara/18-industria-farmaceutica)
-- [ASINFAR](https://www.asinfar.org/)
-- [ACEMI](https://acemi.org.co/)
+**Entidades de gobierno, regulación y gremios por país** (gobierno,
+regulación y gremios/asociaciones citados en cada dataset de ejemplo; en la
+app se muestran de forma dinámica según el país seleccionado en el
+selector — no aparecen todas a la vez para evitar una lista larga)
+- **Colombia:** [Ministerio de Salud y Protección Social](https://www.minsalud.gov.co) · [INVIMA](https://www.invima.gov.co) · [ADRES](https://www.adres.gov.co) · [Superintendencia Nacional de Salud](https://www.supersalud.gov.co) · [IETS](https://www.iets.org.co) · [Cuenta de Alto Costo](https://cuentadealtocosto.org) · [ANDI — Cámara de la Industria Farmacéutica](https://www.andi.com.co/Home/Camara/18-industria-farmaceutica) · [ASINFAR](https://www.asinfar.org/) · [ACEMI](https://acemi.org.co/)
+- **Argentina:** [Ministerio de Salud de la Nación](https://www.argentina.gob.ar/salud) · [ANMAT](https://www.argentina.gob.ar/anmat) · [CAEMe](https://www.caeme.org.ar) · [CILFA](https://www.cilfa.org.ar)
+- **México:** [Secretaría de Salud](https://www.gob.mx/salud) · [COFEPRIS](https://www.gob.mx/cofepris) · [CANIFARMA](https://www.canifarma.org.mx) · [AMIIF](https://amiif.org)
+- **Perú:** [MINSA](https://www.gob.pe/minsa) · [DIGEMID](https://www.digemid.minsa.gob.pe/) · [ALAFARPE](https://www.alafarpe.org.pe) · [ADIFAN](https://www.adifan.org.pe)
+- **Ecuador:** [Ministerio de Salud Pública](https://www.salud.gob.ec/) · [ARCSA](https://www.controlsanitario.gob.ec/) · [ALFE](https://alfe-ecuador.org/)
+- **Brasil:** [Ministério da Saúde](https://www.gov.br/saude/pt-br) · [ANVISA](https://www.gov.br/anvisa/pt-br) · [Interfarma](https://www.interfarma.org.br/)
+- **Centroamérica:** [Ministerio de Salud de Costa Rica](https://www.ministeriodesalud.go.cr) (ejemplo nacional) · [OPS/OMS — Oficina Regional para las Américas](https://www.paho.org/es) · [FEDEFARMA](https://www.fedefarma.com)
 
 *Nota: se revisaron los documentos de la carpeta de trabajo inicial del
 proyecto (PDFs sobre polifarmacia y adherencia terapéutica); corresponden a

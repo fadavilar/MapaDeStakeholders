@@ -151,7 +151,7 @@ function actualizarNotaRegulatoria() {
   const nota = document.getElementById('nota-regulatoria');
   if (!nota) return;
   const paisId = document.getElementById('selector-pais').value;
-  const enlaces = REGULACION_POR_PAIS[paisId] || [];
+  const enlaces = REFERENCIAS_POR_PAIS[paisId] || [];
   if (enlaces.length === 0) {
     nota.innerHTML = '';
     return;
@@ -160,7 +160,7 @@ function actualizarNotaRegulatoria() {
   const enlacesHTML = enlaces
     .map((e) => `<a href="${e.url}" target="_blank" rel="noopener">${escaparHTML(e.label)}</a>`)
     .join(' · ');
-  nota.innerHTML = `📎 Referencias regulatorias oficiales para ${pais ? pais.label : ''}: ${enlacesHTML}`;
+  nota.innerHTML = `📎 Fuentes oficiales para ${pais ? pais.label : ''}: ${enlacesHTML}`;
 }
 
 function cargarDatasetEjemplo() {
@@ -242,8 +242,7 @@ function inicializarPanelMetodologia() {
 }
 
 function manejarExportarHTML() {
-  const imagen = obtenerImagenGrafico();
-  exportarHTML(stakeholders, imagen);
+  exportarHTML(stakeholders);
 }
 
 function manejarExportarXLSX() {
@@ -288,3 +287,11 @@ function inicializar() {
 }
 
 document.addEventListener('DOMContentLoaded', inicializar);
+
+let resizeTimeout;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(() => {
+    if (graficoStakeholders) graficoStakeholders.resize();
+  }, 150);
+});

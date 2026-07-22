@@ -111,7 +111,11 @@ function importarXLSX(file) {
   });
 }
 
-function construirReporteHTML(stakeholders, imagenGraficoDataUrl) {
+function jsonParaScript(valor) {
+  return JSON.stringify(valor).replace(/</g, '\\u003c');
+}
+
+function construirReporteHTML(stakeholders) {
   const fecha = new Date().toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' });
   const filas = stakeholders
     .slice()
@@ -128,9 +132,18 @@ function construirReporteHTML(stakeholders, imagenGraficoDataUrl) {
     })
     .join('\n');
 
-  const imagenHTML = imagenGraficoDataUrl
-    ? `<img src="${imagenGraficoDataUrl}" alt="Mapa de cuadrantes" style="max-width:100%;border:1px solid #dfe4ea;border-radius:10px;" />`
-    : '<p><em>Gráfico no disponible.</em></p>';
+  const categoriasUsadas = CATEGORIAS.filter((c) => stakeholders.some((s) => s.categoria === c.id));
+  const datosGrafico = jsonParaScript(
+    stakeholders.map((s) => ({
+      x: s.interes,
+      y: s.influencia,
+      tamano: s.tamano,
+      categoria: s.categoria,
+      nombre: s.nombre,
+      notas: s.notas,
+    }))
+  );
+  const datosCategorias = jsonParaScript(categoriasUsadas);
 
   return `<!doctype html>
 <html lang="es">
@@ -140,13 +153,17 @@ function construirReporteHTML(stakeholders, imagenGraficoDataUrl) {
 <title>Mapa de Stakeholders — Reporte</title>
 <style>
   body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 24px; color: #1a1f29; background: #f4f6f9; }
-  .contenedor { max-width: 960px; margin: 0 auto; background: #fff; border: 1px solid #dfe4ea; border-radius: 12px; padding: 28px 32px; }
+  .contenedor { max-width: 1100px; margin: 0 auto; background: #fff; border: 1px solid #dfe4ea; border-radius: 12px; padding: 28px 32px; }
   h1 { margin-top: 0; font-size: 1.5rem; }
   .fecha { color: #5a6472; font-size: 0.9rem; margin-top: -8px; }
   table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 0.9rem; }
   th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #dfe4ea; }
   th { color: #5a6472; font-weight: 600; }
-  .grafico { margin-top: 20px; text-align: center; }
+  .grafico-contenedor { position: relative; height: 480px; width: 100%; margin-top: 16px; }
+  .leyenda-grafico { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 14px; padding-top: 12px; border-top: 1px solid #dfe4ea; }
+  .item-leyenda { display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem; color: #5a6472; }
+  .punto-leyenda { flex-shrink: 0; width: 10px; height: 10px; border-radius: 50%; }
+  .aviso-sin-grafico { display: none; color: #b3261e; font-size: 0.85rem; margin-top: 10px; }
   footer { margin-top: 24px; color: #5a6472; font-size: 0.8rem; }
   @media (prefers-color-scheme: dark) {
     body { background: #12161f; color: #e8ebf0; }
@@ -159,7 +176,12 @@ function construirReporteHTML(stakeholders, imagenGraficoDataUrl) {
   <div class="contenedor">
     <h1>🗺️ Mapa de Stakeholders</h1>
     <p class="fecha">Generado el ${fecha} · ${stakeholders.length} actor(es)</p>
-    <div class="grafico">${imagenHTML}</div>
+    <div class="grafico-contenedor"><canvas id="grafico-reporte"></canvas></div>
+    <div id="leyenda-reporte" class="leyenda-grafico"></div>
+    <p id="aviso-sin-grafico" class="aviso-sin-grafico">
+      No se pudo cargar la librería del gráfico (Chart.js vía CDN) — probablemente no hay
+      conexión a internet. La tabla de actores más abajo sigue disponible.
+    </p>
     <table>
       <thead>
         <tr><th>Categoría</th><th>Actor</th><th>Influencia</th><th>Interés</th><th>Notas</th></tr>
@@ -171,9 +193,132 @@ function construirReporteHTML(stakeholders, imagenGraficoDataUrl) {
     <footer>
       Reporte generado con Mapa de Stakeholders (github.com/fadavilar/MapaDeStakeholders).
       Herramienta académica de código abierto; los valores de influencia/interés son
-      subjetivos y deben interpretarse en el contexto específico del análisis.
+      subjetivos y deben interpretarse en el contexto específico del análisis. El gráfico
+      es interactivo (pase el cursor sobre una burbuja para ver detalles); requiere
+      conexión a internet para cargar Chart.js desde su CDN.
     </footer>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js" onerror="document.getElementById('aviso-sin-grafico').style.display='block'"></script>
+  <script>
+    (function () {
+      var puntos = ${datosGrafico};
+      var categorias = ${datosCategorias};
+
+      function radioBurbuja(tamano) {
+        var t = Math.max(1, Math.min(10, Number(tamano) || 5));
+        return 6 + (t - 1) * ((20 - 6) / 9);
+      }
+
+      function iniciar() {
+        if (typeof Chart === 'undefined') {
+          document.getElementById('aviso-sin-grafico').style.display = 'block';
+          return;
+        }
+
+        var porCategoria = {};
+        puntos.forEach(function (p) {
+          if (!porCategoria[p.categoria]) porCategoria[p.categoria] = [];
+          porCategoria[p.categoria].push(p);
+        });
+
+        var datasets = categorias.map(function (cat) {
+          return {
+            label: cat.label,
+            backgroundColor: cat.color + 'b3',
+            borderColor: cat.color,
+            borderWidth: 1.5,
+            data: (porCategoria[cat.id] || []).map(function (p) {
+              return { x: p.x, y: p.y, r: radioBurbuja(p.tamano), nombre: p.nombre, notas: p.notas };
+            }),
+          };
+        });
+
+        var leyenda = document.getElementById('leyenda-reporte');
+        leyenda.innerHTML = categorias
+          .map(function (cat) {
+            return '<span class="item-leyenda"><span class="punto-leyenda" style="background:' + cat.color + '"></span>' + cat.label + '</span>';
+          })
+          .join('');
+
+        var pluginCuadrantes = {
+          id: 'pluginCuadrantes',
+          beforeDraw: function (chart) {
+            var chartArea = chart.chartArea;
+            if (!chartArea) return;
+            var ctx = chart.ctx;
+            var left = chartArea.left, right = chartArea.right, top = chartArea.top, bottom = chartArea.bottom;
+            var xMid = chart.scales.x.getPixelForValue(5);
+            var yMid = chart.scales.y.getPixelForValue(5);
+            ctx.save();
+            ctx.fillStyle = 'rgba(76,175,80,0.09)';
+            ctx.fillRect(xMid, top, right - xMid, yMid - top);
+            ctx.fillStyle = 'rgba(255,193,7,0.10)';
+            ctx.fillRect(left, top, xMid - left, yMid - top);
+            ctx.fillStyle = 'rgba(33,150,243,0.07)';
+            ctx.fillRect(xMid, yMid, right - xMid, bottom - yMid);
+            ctx.fillStyle = 'rgba(158,158,158,0.08)';
+            ctx.fillRect(left, yMid, xMid - left, bottom - yMid);
+            ctx.strokeStyle = 'rgba(0,0,0,0.2)';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([4, 4]);
+            ctx.beginPath();
+            ctx.moveTo(xMid, top); ctx.lineTo(xMid, bottom);
+            ctx.moveTo(left, yMid); ctx.lineTo(right, yMid);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            ctx.font = '600 12px system-ui, sans-serif';
+            ctx.fillStyle = 'rgba(0,0,0,0.45)';
+            var pad = 10;
+            ctx.textBaseline = 'top'; ctx.textAlign = 'right';
+            ctx.fillText('JUGADORES CLAVE', right - pad, top + pad);
+            ctx.textAlign = 'left';
+            ctx.fillText('MANTENER SATISFECHOS', left + pad, top + pad);
+            ctx.textBaseline = 'bottom'; ctx.textAlign = 'right';
+            ctx.fillText('MANTENER INFORMADOS', right - pad, bottom - pad);
+            ctx.textAlign = 'left';
+            ctx.fillText('MONITOREAR', left + pad, bottom - pad);
+            ctx.restore();
+          },
+        };
+
+        new Chart(document.getElementById('grafico-reporte'), {
+          type: 'bubble',
+          data: { datasets: datasets },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            clip: false,
+            layout: { padding: { top: 30, right: 26, bottom: 6, left: 6 } },
+            scales: {
+              x: { min: 0, max: 10, title: { display: true, text: 'Interés →', font: { weight: '600' } }, ticks: { stepSize: 1 } },
+              y: { min: 0, max: 10, title: { display: true, text: 'Influencia →', font: { weight: '600' } }, ticks: { stepSize: 1 } },
+            },
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                callbacks: {
+                  title: function (items) { return (items[0] && items[0].raw && items[0].raw.nombre) || ''; },
+                  label: function (item) {
+                    var r = item.raw;
+                    var lineas = ['Influencia: ' + r.y + '/10 · Interés: ' + r.x + '/10'];
+                    if (r.notas) lineas.push(r.notas);
+                    return lineas;
+                  },
+                },
+              },
+            },
+          },
+          plugins: [pluginCuadrantes],
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', iniciar);
+      } else {
+        iniciar();
+      }
+    })();
+  </script>
 </body>
 </html>`;
 }
@@ -184,8 +329,8 @@ function escaparHTMLTexto(str) {
   return div.innerHTML;
 }
 
-function exportarHTML(stakeholders, imagenGraficoDataUrl) {
-  const html = construirReporteHTML(stakeholders, imagenGraficoDataUrl);
+function exportarHTML(stakeholders) {
+  const html = construirReporteHTML(stakeholders);
   const fecha = new Date().toISOString().slice(0, 10);
   descargarArchivo(html, `mapa-stakeholders-${fecha}.html`, 'text/html;charset=utf-8');
 }
