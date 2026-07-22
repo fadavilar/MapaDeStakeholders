@@ -60,6 +60,7 @@ function renderizarTabla() {
           <td class="celda-nombre">${escaparHTML(s.nombre)}</td>
           <td class="celda-num">${s.influencia}</td>
           <td class="celda-num">${s.interes}</td>
+          <td class="celda-num">${s.tamano}</td>
           <td class="celda-acciones">
             <button type="button" class="btn-icono" data-accion="editar" title="Editar">✏️</button>
             <button type="button" class="btn-icono" data-accion="eliminar" title="Eliminar">🗑️</button>

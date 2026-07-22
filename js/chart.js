@@ -85,6 +85,7 @@ function construirDatasets(stakeholders) {
         x: s.interes,
         y: s.influencia,
         r: radioBurbuja(s.tamano),
+        tamano: s.tamano,
         nombre: s.nombre,
         notas: s.notas,
       })),
@@ -158,7 +159,7 @@ function renderizarGrafico(stakeholders) {
             title: (items) => items[0]?.raw?.nombre ?? '',
             label: (item) => {
               const r = item.raw;
-              const lineas = [`Influencia: ${r.y}/10 · Interés: ${r.x}/10`];
+              const lineas = [`Influencia: ${r.y}/10 · Interés: ${r.x}/10 · Impacto: ${r.tamano}/10`];
               if (r.notas) lineas.push(r.notas);
               return lineas;
             },

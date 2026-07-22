@@ -127,6 +127,7 @@ function construirReporteHTML(stakeholders) {
         <td style="font-weight:600;">${escaparHTMLTexto(s.nombre)}</td>
         <td style="text-align:center;">${s.influencia}</td>
         <td style="text-align:center;">${s.interes}</td>
+        <td style="text-align:center;">${s.tamano}</td>
         <td>${escaparHTMLTexto(s.notas || '')}</td>
       </tr>`;
     })
@@ -184,7 +185,7 @@ function construirReporteHTML(stakeholders) {
     </p>
     <table>
       <thead>
-        <tr><th>Categoría</th><th>Actor</th><th>Influencia</th><th>Interés</th><th>Notas</th></tr>
+        <tr><th>Categoría</th><th>Actor</th><th>Influencia</th><th>Interés</th><th>Impacto</th><th>Notas</th></tr>
       </thead>
       <tbody>
         ${filas}
@@ -228,7 +229,7 @@ function construirReporteHTML(stakeholders) {
             borderColor: cat.color,
             borderWidth: 1.5,
             data: (porCategoria[cat.id] || []).map(function (p) {
-              return { x: p.x, y: p.y, r: radioBurbuja(p.tamano), nombre: p.nombre, notas: p.notas };
+              return { x: p.x, y: p.y, r: radioBurbuja(p.tamano), tamano: p.tamano, nombre: p.nombre, notas: p.notas };
             }),
           };
         });
@@ -300,7 +301,7 @@ function construirReporteHTML(stakeholders) {
                   title: function (items) { return (items[0] && items[0].raw && items[0].raw.nombre) || ''; },
                   label: function (item) {
                     var r = item.raw;
-                    var lineas = ['Influencia: ' + r.y + '/10 · Interés: ' + r.x + '/10'];
+                    var lineas = ['Influencia: ' + r.y + '/10 · Interés: ' + r.x + '/10 · Impacto: ' + r.tamano + '/10'];
                     if (r.notas) lineas.push(r.notas);
                     return lineas;
                   },
