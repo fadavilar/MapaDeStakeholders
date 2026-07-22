@@ -157,7 +157,6 @@ depender de licencias de software de pago.
 - [Banchoff K et al. (2025). "Stakeholder mapping for a complex and diverse population..." *BMC Public Health*](https://pmc.ncbi.nlm.nih.gov/articles/PMC12082871/)
 - [Stakeholder maps — Canva](https://www.canva.com/graphs/stakeholder-maps/) (recurso práctico de diseño, no académico)
 - [Stakeholder Mapping — Johns Hopkins University (Imagine)](https://imagine.jhu.edu/resources/stakeholder-mapping/)
-- [Ley 100 de 1993 — Gestor Normativo, Función Pública (Colombia)](https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=5248)
 
 **Entidades de gobierno, regulación y gremios por país** (gobierno,
 regulación y gremios/asociaciones citados en cada dataset de ejemplo; en la
