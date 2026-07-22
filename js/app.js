@@ -147,6 +147,22 @@ function manejarClicTabla(evento) {
   }
 }
 
+function actualizarNotaRegulatoria() {
+  const nota = document.getElementById('nota-regulatoria');
+  if (!nota) return;
+  const paisId = document.getElementById('selector-pais').value;
+  const enlaces = REGULACION_POR_PAIS[paisId] || [];
+  if (enlaces.length === 0) {
+    nota.innerHTML = '';
+    return;
+  }
+  const pais = PAISES.find((p) => p.id === paisId);
+  const enlacesHTML = enlaces
+    .map((e) => `<a href="${e.url}" target="_blank" rel="noopener">${escaparHTML(e.label)}</a>`)
+    .join(' · ');
+  nota.innerHTML = `📎 Referencias regulatorias oficiales para ${pais ? pais.label : ''}: ${enlacesHTML}`;
+}
+
 function cargarDatasetEjemplo() {
   const paisId = document.getElementById('selector-pais').value;
   const dataset = DATASETS_EJEMPLO[paisId];
@@ -254,7 +270,11 @@ function inicializar() {
   document.getElementById('interes').addEventListener('input', actualizarValoresSlider);
   document.getElementById('tamano').addEventListener('input', actualizarValoresSlider);
 
-  document.getElementById('selector-pais').addEventListener('change', cargarDatasetEjemplo);
+  document.getElementById('selector-pais').addEventListener('change', () => {
+    actualizarNotaRegulatoria();
+    cargarDatasetEjemplo();
+  });
+  actualizarNotaRegulatoria();
   document.getElementById('btn-ejemplo').addEventListener('click', cargarDatasetEjemplo);
   document.getElementById('btn-limpiar-todo').addEventListener('click', limpiarTodo);
   document.getElementById('btn-exportar-xlsx').addEventListener('click', manejarExportarXLSX);

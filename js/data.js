@@ -37,6 +37,43 @@ const PAISES = [
 ];
 
 /**
+ * Referencias regulatorias oficiales por país/región (entes rectores y
+ * autoridades de registro sanitario), enlazadas según el país seleccionado
+ * en el selector de ejemplo. Todos los enlaces fueron verificados como
+ * activos al momento de publicar esta versión.
+ */
+const REGULACION_POR_PAIS = {
+  colombia: [
+    { label: 'Ministerio de Salud y Protección Social', url: 'https://www.minsalud.gov.co' },
+    { label: 'INVIMA', url: 'https://www.invima.gov.co' },
+  ],
+  argentina: [
+    { label: 'Ministerio de Salud de la Nación', url: 'https://www.argentina.gob.ar/salud' },
+    { label: 'ANMAT', url: 'https://www.argentina.gob.ar/anmat' },
+  ],
+  mexico: [
+    { label: 'Secretaría de Salud', url: 'https://www.gob.mx/salud' },
+    { label: 'COFEPRIS', url: 'https://www.gob.mx/cofepris' },
+  ],
+  peru: [
+    { label: 'MINSA', url: 'https://www.gob.pe/minsa' },
+    { label: 'DIGEMID', url: 'https://www.digemid.minsa.gob.pe/' },
+  ],
+  ecuador: [
+    { label: 'Ministerio de Salud Pública', url: 'https://www.salud.gob.ec/' },
+    { label: 'ARCSA', url: 'https://www.controlsanitario.gob.ec/' },
+  ],
+  brasil: [
+    { label: 'Ministério da Saúde', url: 'https://www.gov.br/saude/pt-br' },
+    { label: 'ANVISA', url: 'https://www.gov.br/anvisa/pt-br' },
+  ],
+  centroamerica: [
+    { label: 'Ministerio de Salud de Costa Rica (ejemplo nacional)', url: 'https://www.ministeriodesalud.go.cr' },
+    { label: 'OPS/OMS — Oficina Regional para las Américas', url: 'https://www.paho.org/es' },
+  ],
+};
+
+/**
  * Datasets de ejemplo por país/región: posicionamiento ilustrativo, con
  * fines académicos y de práctica en análisis de política pública en salud.
  * La influencia e interés reales varían según el producto, la terapia,

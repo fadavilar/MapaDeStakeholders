@@ -210,6 +210,13 @@ html, body {
 }
 .nota-plantilla a { color: var(--color-primario); }
 
+.nota-regulatoria {
+  font-size: 0.82rem;
+  color: var(--color-texto-suave);
+  margin: -10px 0 18px;
+}
+.nota-regulatoria a { color: var(--color-primario); font-weight: 600; }
+
 .etiqueta-inline {
   font-size: 0.85rem;
   color: var(--color-texto-suave);
@@ -382,8 +389,33 @@ html, body {
 
 .grafico-contenedor {
   position: relative;
-  height: 560px;
+  height: 500px;
   width: 100%;
+}
+
+.leyenda-grafico {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-borde);
+}
+
+.item-leyenda {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: var(--color-texto-suave);
+  max-width: 100%;
+}
+
+.punto-leyenda {
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
 }
 
 .pie {

@@ -51,6 +51,8 @@ en una hoja de cálculo.
 - Incluye **conjuntos de datos de ejemplo** para siete países/regiones
   (Colombia, Argentina, México, Perú, Ecuador, Brasil y Centroamérica y
   República Dominicana), listos para cargar con un clic desde un selector.
+  Al elegir un país se muestran también sus **referencias regulatorias
+  oficiales** (ministerio de salud y autoridad de registro sanitario).
 - **Carga masiva vía Excel**: descarga [`plantilla-mapa-stakeholders.xlsx`](plantilla-mapa-stakeholders.xlsx),
   un archivo **estático y prediligenciado** (no generado por JavaScript) con
   instrucciones y categorías válidas, diligénciala y súbela con el botón
@@ -144,15 +146,22 @@ depender de licencias de software de pago.
 - [Schmeer K. "Stakeholder Analysis Guidelines" — Iniciativa Regional de Reforma del Sector Salud en América Latina y el Caribe (LAC-HSR)](https://cnxus.org/wp-content/uploads/2022/04/Stakeholders_analysis_guidelines.pdf)
 - [Reich MR et al. "Health Reform Manual: Eight Practical Steps" — Harvard T.H. Chan School of Public Health](https://hsph.harvard.edu/wp-content/uploads/2025/02/Health-Reform-Manual_FINAL_for-website-002.pdf)
 - ["Engaging Stakeholders..." — Evidence Synthesis for Health Policy and Systems: A Methods Guide, OMS (2018)](https://www.ncbi.nlm.nih.gov/books/NBK569579/)
+- [Stakeholder Mapping Tool — Organización Mundial de la Salud (OMS)](https://cdn.who.int/media/docs/default-source/reproductive-health/contraception-family-planning/stakeholder-mapping-tool.pdf)
+- [Stakeholder Mapping — Banco Mundial](https://documentos.bancomundial.org/es/publication/documents-reports/documentdetail/099241111072316405)
+- [Banchoff K et al. (2025). "Stakeholder mapping for a complex and diverse population..." *BMC Public Health*](https://pmc.ncbi.nlm.nih.gov/articles/PMC12082871/)
+- [Stakeholder maps — Canva](https://www.canva.com/graphs/stakeholder-maps/) (recurso práctico de diseño, no académico)
+- [Stakeholder Mapping — Johns Hopkins University (Imagine)](https://imagine.jhu.edu/resources/stakeholder-mapping/)
 - [Ley 100 de 1993 — Gestor Normativo, Función Pública (Colombia)](https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=5248)
 
-**Entidades de gobierno y regulación (Colombia, ver dataset de ejemplo)**
-- [Ministerio de Salud y Protección Social](https://www.minsalud.gov.co)
-- [INVIMA](https://www.invima.gov.co)
-- [ADRES](https://www.adres.gov.co)
-- [Superintendencia Nacional de Salud](https://www.supersalud.gov.co)
-- [IETS](https://www.iets.org.co)
-- [Cuenta de Alto Costo](https://cuentadealtocosto.org)
+**Entidades de gobierno y regulación por país** (también se muestran de forma
+dinámica en la app, según el país seleccionado en el selector de ejemplo)
+- **Colombia:** [Ministerio de Salud y Protección Social](https://www.minsalud.gov.co) · [INVIMA](https://www.invima.gov.co) · [ADRES](https://www.adres.gov.co) · [Superintendencia Nacional de Salud](https://www.supersalud.gov.co) · [IETS](https://www.iets.org.co) · [Cuenta de Alto Costo](https://cuentadealtocosto.org)
+- **Argentina:** [Ministerio de Salud de la Nación](https://www.argentina.gob.ar/salud) · [ANMAT](https://www.argentina.gob.ar/anmat)
+- **México:** [Secretaría de Salud](https://www.gob.mx/salud) · [COFEPRIS](https://www.gob.mx/cofepris)
+- **Perú:** [MINSA](https://www.gob.pe/minsa) · [DIGEMID](https://www.digemid.minsa.gob.pe/)
+- **Ecuador:** [Ministerio de Salud Pública](https://www.salud.gob.ec/) · [ARCSA](https://www.controlsanitario.gob.ec/)
+- **Brasil:** [Ministério da Saúde](https://www.gov.br/saude/pt-br) · [ANVISA](https://www.gov.br/anvisa/pt-br)
+- **Centroamérica:** [Ministerio de Salud de Costa Rica](https://www.ministeriodesalud.go.cr) (ejemplo nacional) · [OPS/OMS — Oficina Regional para las Américas](https://www.paho.org/es)
 
 **Gremios sectoriales (Colombia, ver dataset de ejemplo)**
 - [ANDI — Cámara de la Industria Farmacéutica](https://www.andi.com.co/Home/Camara/18-industria-farmaceutica)

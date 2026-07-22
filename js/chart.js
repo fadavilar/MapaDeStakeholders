@@ -92,9 +92,32 @@ function construirDatasets(stakeholders) {
   });
 }
 
+function renderizarLeyenda(stakeholders) {
+  const contenedor = document.getElementById('leyenda-grafico');
+  if (!contenedor) return;
+
+  const idsPresentes = [];
+  stakeholders.forEach((s) => {
+    if (!idsPresentes.includes(s.categoria)) idsPresentes.push(s.categoria);
+  });
+
+  if (idsPresentes.length === 0) {
+    contenedor.innerHTML = '';
+    return;
+  }
+
+  contenedor.innerHTML = idsPresentes
+    .map((id) => {
+      const cat = getCategoria(id);
+      return `<span class="item-leyenda"><span class="punto-leyenda" style="background:${cat.color}"></span>${cat.label}</span>`;
+    })
+    .join('');
+}
+
 function renderizarGrafico(stakeholders) {
   const ctx = document.getElementById('grafico-stakeholders');
   const datasets = construirDatasets(stakeholders);
+  renderizarLeyenda(stakeholders);
 
   if (graficoStakeholders) {
     graficoStakeholders.data.datasets = datasets;
@@ -128,8 +151,7 @@ function renderizarGrafico(stakeholders) {
       },
       plugins: {
         legend: {
-          position: 'bottom',
-          labels: { boxWidth: 10, boxHeight: 10, padding: 12, font: { size: 11 } },
+          display: false,
         },
         tooltip: {
           callbacks: {
