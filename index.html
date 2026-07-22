@@ -6,7 +6,7 @@
   <title>Mapa de Stakeholders — Sistema de Salud Latinoamericano</title>
   <meta name="description" content="Herramienta guía académica y práctica para mapear y diagramar stakeholders (matriz de influencia e interés) en el análisis de política pública en salud y la industria farmacéutica en Latinoamérica." />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='30' cy='30' r='16' fill='%231f4e8c'/%3E%3Ccircle cx='70' cy='35' r='12' fill='%23c2185b'/%3E%3Ccircle cx='45' cy='68' r='20' fill='%231a8f5e'/%3E%3C/svg%3E" />
-  <link rel="stylesheet" href="css/styles.css?v=7" />
+  <link rel="stylesheet" href="css/styles.css?v=8" />
 </head>
 <body>
   <header class="cabecera">
@@ -16,6 +16,22 @@
         <p class="subtitulo">Política pública en salud e industria farmacéutica · Latinoamérica</p>
       </div>
       <button type="button" id="btn-tema" class="btn-icono btn-tema" title="Cambiar tema claro/oscuro">🌙</button>
+    </div>
+    <div class="contenedor campo-decision">
+      <label for="decision-actual">Decisión / proyecto en evaluación</label>
+      <input
+        type="text"
+        id="decision-actual"
+        placeholder="Ej. Inclusión de [producto] en el plan de beneficios del régimen contributivo"
+      />
+      <span class="ayuda" tabindex="0">
+        ⓘ
+        <span class="ayuda-tooltip" role="tooltip">
+          La influencia y el interés de cada actor son siempre relativos a una decisión,
+          producto, terapia o proyecto específico. Describe aquí ese contexto para que el
+          mapa quede claro al compartirlo o retomarlo después.
+        </span>
+      </span>
     </div>
   </header>
 
@@ -68,7 +84,9 @@
           El tamaño de la burbuja es un tercer atributo opcional (por ejemplo, magnitud del
           impacto esperado) y no altera el cuadrante. El posicionamiento es siempre
           <strong>relativo a un producto, terapia o proyecto específico</strong>: un mismo
-          actor puede ubicarse de forma distinta según el contexto analizado. Use el botón
+          actor puede ubicarse de forma distinta según el contexto analizado. Describe esa
+          decisión en el campo <em>"Decisión / proyecto en evaluación"</em> al inicio de la
+          página — queda como título del gráfico y en los reportes exportados. Use el botón
           <em>"Cargar ejemplo"</em> para ver un conjunto ilustrativo de actores típicos y
           ajústelo a su propio análisis.
         </p>
@@ -283,9 +301,9 @@
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-  <script src="js/data.js?v=7"></script>
-  <script src="js/storage.js?v=7"></script>
-  <script src="js/chart.js?v=7"></script>
-  <script src="js/app.js?v=7"></script>
+  <script src="js/data.js?v=8"></script>
+  <script src="js/storage.js?v=8"></script>
+  <script src="js/chart.js?v=8"></script>
+  <script src="js/app.js?v=8"></script>
 </body>
 </html>

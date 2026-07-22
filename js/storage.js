@@ -3,6 +3,23 @@
  * y exportación a Excel (XLSX) y a reporte HTML autocontenido.
  */
 const STORAGE_KEY = 'mapa-stakeholders-v1';
+const STORAGE_KEY_DECISION = 'mapa-stakeholders-decision';
+
+function cargarDecision() {
+  try {
+    return localStorage.getItem(STORAGE_KEY_DECISION) || '';
+  } catch (e) {
+    return '';
+  }
+}
+
+function guardarDecision(texto) {
+  try {
+    localStorage.setItem(STORAGE_KEY_DECISION, texto);
+  } catch (e) {
+    console.warn('No se pudo guardar la decisión en localStorage:', e);
+  }
+}
 
 function cargarStakeholders() {
   try {
@@ -115,8 +132,11 @@ function jsonParaScript(valor) {
   return JSON.stringify(valor).replace(/</g, '\\u003c');
 }
 
-function construirReporteHTML(stakeholders) {
+function construirReporteHTML(stakeholders, decision) {
   const fecha = new Date().toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' });
+  const decisionHTML = decision
+    ? `<p class="decision">Decisión / proyecto en evaluación: <strong>${escaparHTMLTexto(decision)}</strong></p>`
+    : '';
   const filas = stakeholders
     .slice()
     .sort((a, b) => b.influencia * b.interes - a.influencia * a.interes)
@@ -157,6 +177,7 @@ function construirReporteHTML(stakeholders) {
   .contenedor { max-width: 1100px; margin: 0 auto; background: #fff; border: 1px solid #dfe4ea; border-radius: 12px; padding: 28px 32px; }
   h1 { margin-top: 0; font-size: 1.5rem; }
   .fecha { color: #5a6472; font-size: 0.9rem; margin-top: -8px; }
+  .decision { background: #f4f6f9; border: 1px solid #dfe4ea; border-radius: 8px; padding: 10px 14px; font-size: 0.92rem; }
   table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 0.9rem; }
   th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #dfe4ea; }
   th { color: #5a6472; font-weight: 600; }
@@ -170,6 +191,7 @@ function construirReporteHTML(stakeholders) {
     body { background: #12161f; color: #e8ebf0; }
     .contenedor { background: #1a2029; border-color: #2b3340; }
     th, td { border-color: #2b3340; }
+    .decision { background: #12161f; border-color: #2b3340; }
   }
 </style>
 </head>
@@ -177,6 +199,7 @@ function construirReporteHTML(stakeholders) {
   <div class="contenedor">
     <h1>🗺️ Mapa de Stakeholders</h1>
     <p class="fecha">Generado el ${fecha} · ${stakeholders.length} actor(es)</p>
+    ${decisionHTML}
     <div class="grafico-contenedor"><canvas id="grafico-reporte"></canvas></div>
     <div id="leyenda-reporte" class="leyenda-grafico"></div>
     <p id="aviso-sin-grafico" class="aviso-sin-grafico">
@@ -204,6 +227,7 @@ function construirReporteHTML(stakeholders) {
     (function () {
       var puntos = ${datosGrafico};
       var categorias = ${datosCategorias};
+      var decisionTexto = ${jsonParaScript(decision || '')};
 
       function radioBurbuja(tamano) {
         var t = Math.max(1, Math.min(10, Number(tamano) || 5));
@@ -295,6 +319,9 @@ function construirReporteHTML(stakeholders) {
               y: { min: 0, max: 10, title: { display: true, text: 'Influencia →', font: { weight: '600' } }, ticks: { stepSize: 1 } },
             },
             plugins: {
+              title: decisionTexto
+                ? { display: true, text: 'Decisión evaluada: ' + decisionTexto, font: { size: 12, weight: '600' }, padding: { bottom: 10 } }
+                : { display: false },
               legend: { display: false },
               tooltip: {
                 callbacks: {
@@ -330,8 +357,8 @@ function escaparHTMLTexto(str) {
   return div.innerHTML;
 }
 
-function exportarHTML(stakeholders) {
-  const html = construirReporteHTML(stakeholders);
+function exportarHTML(stakeholders, decision) {
+  const html = construirReporteHTML(stakeholders, decision);
   const fecha = new Date().toISOString().slice(0, 10);
   descargarArchivo(html, `mapa-stakeholders-${fecha}.html`, 'text/html;charset=utf-8');
 }

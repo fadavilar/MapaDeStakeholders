@@ -34,9 +34,14 @@ en una hoja de cálculo.
 
 ## ¿Qué hace?
 
+- Permite registrar la **decisión, producto o proyecto en evaluación** en un
+  campo del encabezado — la influencia y el interés de cada actor siempre
+  son relativos a ese contexto. Queda como título del gráfico y se incluye
+  en el reporte HTML exportado.
 - Permite **diligenciar actores** mediante un formulario: nombre, categoría,
   influencia (0–10), interés (0–10), un tercer atributo opcional de tamaño
-  ("impacto") y notas libres. Cada campo incluye un tooltip explicativo.
+  ("impacto") y notas libres. Cada campo incluye un tooltip explicativo. El
+  tooltip del gráfico y la tabla muestran los tres parámetros completos.
 - Clasifica a cada actor en una de **14 categorías** propias de los sistemas
   de salud latinoamericanos (gobierno/ente rector, regulación sanitaria,
   aseguramiento, prestación, entes de control, evaluación de tecnologías,

@@ -54,6 +54,33 @@ html, body {
   padding: 18px 20px;
 }
 
+.campo-decision {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 0 20px 16px;
+}
+
+.campo-decision label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-texto-suave);
+  white-space: nowrap;
+}
+
+.campo-decision input {
+  flex: 1;
+  min-width: 260px;
+  padding: 8px 10px;
+  border: 1px solid var(--color-borde);
+  border-radius: 7px;
+  background: var(--color-fondo);
+  color: var(--color-texto);
+  font-size: 0.92rem;
+  font-family: inherit;
+}
+
 .cabecera-titulo h1 {
   margin: 0;
   font-size: 1.4rem;

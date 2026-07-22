@@ -3,6 +3,7 @@
  */
 let stakeholders = [];
 let editandoId = null;
+let decisionActual = '';
 
 function generarId() {
   return `sh_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
@@ -29,8 +30,14 @@ function actualizarValoresSlider() {
 function persistirYRenderizar() {
   guardarStakeholders(stakeholders);
   renderizarTabla();
-  renderizarGrafico(stakeholders);
+  renderizarGrafico(stakeholders, decisionActual);
   actualizarContador();
+}
+
+function manejarCambioDecision(evento) {
+  decisionActual = evento.target.value.trim();
+  guardarDecision(decisionActual);
+  if (graficoStakeholders) renderizarGrafico(stakeholders, decisionActual);
 }
 
 function actualizarContador() {
@@ -243,7 +250,7 @@ function inicializarPanelMetodologia() {
 }
 
 function manejarExportarHTML() {
-  exportarHTML(stakeholders);
+  exportarHTML(stakeholders, decisionActual);
 }
 
 function manejarExportarXLSX() {
@@ -260,9 +267,13 @@ function inicializar() {
   const guardados = cargarStakeholders();
   stakeholders = guardados && guardados.length ? guardados : [];
 
+  decisionActual = cargarDecision();
+  document.getElementById('decision-actual').value = decisionActual;
+
   actualizarValoresSlider();
   persistirYRenderizar();
 
+  document.getElementById('decision-actual').addEventListener('input', manejarCambioDecision);
   document.getElementById('form-stakeholder').addEventListener('submit', manejarEnvioFormulario);
   document.getElementById('btn-cancelar-edicion').addEventListener('click', limpiarFormulario);
   document.getElementById('cuerpo-tabla').addEventListener('click', manejarClicTabla);

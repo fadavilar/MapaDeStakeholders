@@ -115,13 +115,21 @@ function renderizarLeyenda(stakeholders) {
     .join('');
 }
 
-function renderizarGrafico(stakeholders) {
+function renderizarGrafico(stakeholders, decision) {
   const ctx = document.getElementById('grafico-stakeholders');
   const datasets = construirDatasets(stakeholders);
   renderizarLeyenda(stakeholders);
 
+  const tituloConfig = {
+    display: Boolean(decision),
+    text: decision ? `Decisión evaluada: ${decision}` : '',
+    font: { size: 12, weight: '600' },
+    padding: { bottom: 10 },
+  };
+
   if (graficoStakeholders) {
     graficoStakeholders.data.datasets = datasets;
+    graficoStakeholders.options.plugins.title = tituloConfig;
     graficoStakeholders.update();
     return;
   }
@@ -151,6 +159,7 @@ function renderizarGrafico(stakeholders) {
         },
       },
       plugins: {
+        title: tituloConfig,
         legend: {
           display: false,
         },
